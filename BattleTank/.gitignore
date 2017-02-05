@@ -1,6 +1,6 @@
 # Own additions
 *.VC.db
-*/ipch
+ipch/*
 
 # Visual Studio 2015 user specific files
 .vs/
