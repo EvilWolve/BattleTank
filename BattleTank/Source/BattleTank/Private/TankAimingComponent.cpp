@@ -46,11 +46,14 @@ void UTankAimingComponent::AimAt(FVector hitLocation, float launchSpeed) {
 		hitLocation,
 		launchSpeed,
 		false,
+		0,
+		0,
 		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
 
 	if (hasAimSolution) {
 		FVector aimDirection = outLaunchVelocity.GetSafeNormal();
+		MoveBarrel(aimDirection);
 	}
 }
 
@@ -59,7 +62,5 @@ void UTankAimingComponent::MoveBarrel(FVector aimDirection) {
 	FRotator aimAsRotation = aimDirection.Rotation();
 	FRotator deltaRotation = aimAsRotation - barrelRotation;
 
-	UE_LOG(LogTemp, Warning, TEXT("DeltaRotator: %s"), *deltaRotation.ToString());
-
-	barrel->Elevate(5);
+	barrel->Elevate(deltaRotation.Pitch);
 }
